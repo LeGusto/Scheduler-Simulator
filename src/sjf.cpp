@@ -1,16 +1,16 @@
-#include "../includes/policies/fifo.h"
+#include "../includes/policies/sjf.h"
 #include <iostream>
 
-void FIFO::enqueue_job(Job job)
+void SJF::enqueue_job(Job job)
 {
     this->q.push(std::move(job));
 }
 
-bool FIFO::process_job()
+bool SJF::process_job()
 {
     if (!q.empty())
     {
-        Job j = std::move(q.front());
+        Job j = std::move(q.top());
         q.pop();
 
         j.start_time = time;
@@ -24,7 +24,7 @@ bool FIFO::process_job()
         return false;
 }
 
-int FIFO::pending_jobs()
+int SJF::pending_jobs()
 {
     return q.size();
 }

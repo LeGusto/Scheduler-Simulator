@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../policy.h"
 #include <queue>
 
@@ -7,6 +9,7 @@ private:
     std::queue<Job> q;
 
 public:
-    bool enqueue_job(Job job) override;
+    void enqueue_job(Job job) override;
     bool process_job() override;
+    int pending_jobs() override;
 };
