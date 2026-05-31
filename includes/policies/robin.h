@@ -1,13 +1,14 @@
 #pragma once
 
 #include "../policy.h"
+#include "../../CONFIG.h"
 #include <list>
 
 class ROBIN : public Policy
 {
 private:
     std::list<Job> q;
-    const int QUANTUM = 2;
+    static constexpr int QUANTUM = RR_QUANTUM;
     std::list<Job>::iterator last_job = q.end();
 
 public:

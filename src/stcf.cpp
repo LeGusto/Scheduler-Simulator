@@ -24,7 +24,15 @@ bool STCF::process_job()
         }
         time++;
         curr_job.remaining_time--;
-        if (curr_job.remaining_time == 0)
+
+        if (curr_job.io_at != -1 && --curr_job.io_at == 0)
+        {
+            curr_job.io_ready_at = time + curr_job.io_duration;
+            curr_job.io_at = -1;
+            waiting.push(std::move(curr_job));
+            curr_job.arrival_time = -1;
+        }
+        else if (curr_job.remaining_time == 0)
         {
             curr_job.end_time = time;
             results.push_back(std::move(curr_job));

@@ -6,17 +6,12 @@
 #include <cstdio>
 #include <iostream>
 #include <string.h>
-
-std::vector<Job> jobs =
-    {
-        Job(0, 10),
-        Job(1, 5),
-        Job(6, 4)};
+#include <fstream>
+#include <sstream>
 
 int main(int argc, char *argv[])
 {
     Policy *pol;
-
     if (argc > 1)
     {
         if (strcmp(argv[1], "sjf") == 0)
@@ -27,7 +22,6 @@ int main(int argc, char *argv[])
         else if (strcmp(argv[1], "stcf") == 0)
         {
             pol = new STCF;
-            std::cout << "hi\n";
         }
         else if (strcmp(argv[1], "robin") == 0)
             pol = new ROBIN;
@@ -37,20 +31,48 @@ int main(int argc, char *argv[])
         }
     }
 
+    const char *dir = "";
+    if (argc > 2)
+    {
+        dir = argv[2];
+    }
+    else
+    {
+        dir = "workloads/example_jobs.in";
+    }
+
+    std::vector<Job> jobs;
+    std::ifstream in(dir);
+    std::string line;
+
+    while (std::getline(in, line))
+    {
+        if (line.empty() || line[0] == '#')
+            continue;
+        std::istringstream ss(line);
+        int arrival, burst;
+        ss >> arrival >> burst;
+
+        std::vector<std::pair<int, int>> io_events;
+        int io_at, io_dur;
+        while (ss >> io_at >> io_dur)
+            io_events.push_back({io_at, io_dur});
+
+        if (io_events.empty())
+            jobs.push_back(Job(arrival, burst));
+        else
+            jobs.push_back(Job(arrival, burst, std::move(io_events)));
+    }
+
     for (auto &job : jobs)
     {
-        while (pol->pending_jobs() && pol->time < job.arrival_time)
-        {
-            if (!pol->process_job())
-                throw std::runtime_error("Processing failed");
-        }
+        while ((pol->pending_jobs() || pol->has_waiting()) && pol->time < job.arrival_time)
+            pol->step();
+        pol->time = std::max(pol->time, job.arrival_time);
         pol->enqueue_job(job);
     }
-    while (pol->pending_jobs())
-    {
-        if (!pol->process_job())
-            throw std::runtime_error("Processing failed");
-    }
+    while (pol->pending_jobs() || pol->has_waiting())
+        pol->step();
 
     pol->print_stats();
 }

@@ -2,6 +2,17 @@
 #include <numeric>
 #include <iostream>
 
+void Policy::enqueue_waiting()
+{
+    while (!waiting.empty() && waiting.top().io_ready_at <= time)
+    {
+        Job j = std::move(const_cast<Job &>(waiting.top()));
+        waiting.pop();
+        j.next_io();
+        enqueue_job(j);
+    }
+}
+
 double Policy::get_response_t()
 {
     int n = results.size();
