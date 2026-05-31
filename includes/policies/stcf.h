@@ -3,14 +3,16 @@
 #include "../policy.h"
 #include <queue>
 
-class SJF : public Policy
+class STCF : public Policy
 {
 private:
+    Job curr_job = Job(-1, -1);
+
     struct cmp
     {
         bool operator()(Job &a, Job &b)
         {
-            return a.burst_time > b.burst_time;
+            return a.remaining_time > b.remaining_time;
         }
     };
 

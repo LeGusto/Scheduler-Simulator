@@ -1,9 +1,9 @@
 #include "../includes/policies/sjf.h"
 #include <iostream>
 
-void SJF::enqueue_job(Job job)
+void SJF::enqueue_job(Job &job)
 {
-    this->q.push(std::move(job));
+    q.push(std::move(job));
 }
 
 bool SJF::process_job()

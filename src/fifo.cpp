@@ -1,7 +1,7 @@
 #include "../includes/policies/fifo.h"
 #include <iostream>
 
-void FIFO::enqueue_job(Job job)
+void FIFO::enqueue_job(Job &job)
 {
     this->q.push(std::move(job));
 }

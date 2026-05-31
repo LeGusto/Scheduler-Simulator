@@ -1,5 +1,7 @@
 #include "../includes/policies/fifo.h"
 #include "../includes/policies/sjf.h"
+#include "../includes/policies/stcf.h"
+#include "../includes/policies/robin.h"
 
 #include <cstdio>
 #include <iostream>
@@ -22,6 +24,13 @@ int main(int argc, char *argv[])
 
         else if (strcmp(argv[1], "fifo") == 0)
             pol = new FIFO;
+        else if (strcmp(argv[1], "stcf") == 0)
+        {
+            pol = new STCF;
+            std::cout << "hi\n";
+        }
+        else if (strcmp(argv[1], "robin") == 0)
+            pol = new ROBIN;
         else
         {
             pol = new FIFO;
@@ -32,13 +41,15 @@ int main(int argc, char *argv[])
     {
         while (pol->pending_jobs() && pol->time < job.arrival_time)
         {
-            pol->process_job();
+            if (!pol->process_job())
+                throw std::runtime_error("Processing failed");
         }
         pol->enqueue_job(job);
     }
     while (pol->pending_jobs())
     {
-        pol->process_job();
+        if (!pol->process_job())
+            throw std::runtime_error("Processing failed");
     }
 
     pol->print_stats();
