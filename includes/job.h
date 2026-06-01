@@ -28,4 +28,6 @@ struct Job
     int io_duration = 0;
     int io_ready_at = -1;
     std::vector<std::pair<int,int>> io_events;
+
+    int remaining_quantum = 0;
 };
