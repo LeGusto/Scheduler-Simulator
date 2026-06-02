@@ -10,6 +10,7 @@ A CPU scheduler simulator built in C++.
 | `sjf` | Shortest Job First — non-preemptive, picks shortest burst |
 | `stcf` | Shortest Time to Completion First — preemptive SJF |
 | `robin` | Round Robin — each job gets a fixed time quantum |
+| `mlfq` | Multi-Level Feedback Queue — priority queues with demotion and periodic boost |
 
 ## Build
 
@@ -58,6 +59,9 @@ Edit `CONFIG.h` to change scheduler parameters:
 | Parameter | Default | Description |
 |-----------|---------|-------------|
 | `RR_QUANTUM` | `2` | Time slice for Round Robin |
+| `MLFQ_QUEUES` | `3` | Number of priority queues in MLFQ |
+| `MLFQ_QUANTUM` | `5` | Base time quantum for MLFQ, grows exponentially per level |
+| `MLFQ_BOOST_INTERVAL` | `50` | Ticks between priority boosts in MLFQ |
 
 ## Metrics
 
