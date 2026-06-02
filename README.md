@@ -41,7 +41,7 @@ arrival  burst  [io_at  io_duration] ...
 - Lines starting with `#` are ignored
 - `arrival` — tick at which the job enters the system
 - `burst` — total CPU time needed
-- `io_at io_duration` — optional pairs: block for I/O after `io_at` CPU ticks, resume after `io_duration` ticks. Multiple pairs supported.
+- `io_at io_duration` — optional pairs: block for I/O after `io_at` time, resume after `io_duration` ticks. Multiple pairs supported.
 
 Example:
 ```

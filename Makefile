@@ -1,2 +1,2 @@
-all: src/fifo.cpp src/main.cpp src/policy.cpp src/sjf.cpp src/stcf.cpp src/robin.cpp src/job.cpp
-	g++ src/fifo.cpp src/main.cpp src/policy.cpp src/sjf.cpp src/stcf.cpp src/robin.cpp src/job.cpp -I. -o ./bin/main
+all: src/fifo.cpp src/main.cpp src/policy.cpp src/sjf.cpp src/stcf.cpp src/robin.cpp src/job.cpp src/mlfq.cpp
+	g++ src/fifo.cpp src/main.cpp src/policy.cpp src/sjf.cpp src/stcf.cpp src/robin.cpp src/job.cpp src/mlfq.cpp -I. -o ./bin/main

@@ -10,6 +10,10 @@ class MLFQ : public Policy
 private:
     std::vector<std::list<Job>> qs{MLFQ_QUEUES};
 
+    int last_boost = 0;
+
+    void boost();
+
 public:
     void enqueue_job(Job &job) override;
     bool process_job() override;

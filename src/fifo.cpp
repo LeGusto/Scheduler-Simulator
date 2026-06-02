@@ -18,16 +18,20 @@ bool FIFO::process_job()
 
         if (j.io_at != -1 && j.io_at < j.remaining_time)
         {
+            printf("[t=%d] running job(arr=%d, rem=%d) for %d ticks\n", time, j.arrival_time, j.remaining_time, j.io_at);
             time += j.io_at;
             j.remaining_time -= j.io_at;
             j.io_ready_at = time + j.io_duration;
             j.io_at = -1;
+            printf("[t=%d] job(arr=%d) blocked for I/O until t=%d\n", time, j.arrival_time, j.io_ready_at);
             waiting.push(std::move(j));
         }
         else
         {
+            printf("[t=%d] running job(arr=%d, rem=%d) for %d ticks\n", time, j.arrival_time, j.remaining_time, j.remaining_time);
             time += j.remaining_time;
             j.end_time = time;
+            printf("[t=%d] job(arr=%d) done\n", time, j.arrival_time);
             results.push_back(std::move(j));
         }
         return true;

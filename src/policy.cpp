@@ -32,6 +32,7 @@ double Policy::get_turnaround_t()
 
 void Policy::print_stats()
 {
+    printf("\n=== Results ===\n");
     printf("Turnaround: %f\nResponse: %f\n", get_turnaround_t(), get_response_t());
 
     for (auto &j : results)

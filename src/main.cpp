@@ -2,6 +2,7 @@
 #include "../includes/policies/sjf.h"
 #include "../includes/policies/stcf.h"
 #include "../includes/policies/robin.h"
+#include "../includes/policies/mlfq.h"
 
 #include <cstdio>
 #include <iostream>
@@ -16,19 +17,16 @@ int main(int argc, char *argv[])
     {
         if (strcmp(argv[1], "sjf") == 0)
             pol = new SJF;
-
         else if (strcmp(argv[1], "fifo") == 0)
             pol = new FIFO;
         else if (strcmp(argv[1], "stcf") == 0)
-        {
             pol = new STCF;
-        }
         else if (strcmp(argv[1], "robin") == 0)
             pol = new ROBIN;
+        else if (strcmp(argv[1], "mlfq") == 0)
+            pol = new MLFQ;
         else
-        {
             pol = new FIFO;
-        }
     }
 
     const char *dir = "";
