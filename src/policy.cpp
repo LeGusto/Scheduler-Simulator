@@ -37,6 +37,6 @@ void Policy::print_stats()
 
     for (auto &j : results)
     {
-        printf("Job (arr=%d, dur=%d): Start = %d, End = %d\n", j.arrival_time, j.burst_time, j.start_time, j.end_time);
+        printf("Job (arr=%d, dur=%d): Start = %d, End = %d\n", j.arrival_time, j.duration, j.start_time, j.end_time);
     }
 }

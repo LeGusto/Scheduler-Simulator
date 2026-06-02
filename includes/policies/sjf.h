@@ -10,7 +10,7 @@ private:
     {
         bool operator()(Job &a, Job &b)
         {
-            return a.burst_time > b.burst_time;
+            return a.duration > b.duration;
         }
     };
 

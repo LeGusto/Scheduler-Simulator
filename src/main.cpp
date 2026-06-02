@@ -48,8 +48,8 @@ int main(int argc, char *argv[])
         if (line.empty() || line[0] == '#')
             continue;
         std::istringstream ss(line);
-        int arrival, burst;
-        ss >> arrival >> burst;
+        int arrival, duration;
+        ss >> arrival >> duration;
 
         std::vector<std::pair<int, int>> io_events;
         int io_at, io_dur;
@@ -57,9 +57,9 @@ int main(int argc, char *argv[])
             io_events.push_back({io_at, io_dur});
 
         if (io_events.empty())
-            jobs.push_back(Job(arrival, burst));
+            jobs.push_back(Job(arrival, duration));
         else
-            jobs.push_back(Job(arrival, burst, std::move(io_events)));
+            jobs.push_back(Job(arrival, duration, std::move(io_events)));
     }
 
     for (auto &job : jobs)

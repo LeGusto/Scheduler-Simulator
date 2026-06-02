@@ -11,9 +11,9 @@ struct Job
     void print_job();
     void next_io();
 
-    Job(int _arrival_time, int _burst_time) : arrival_time(_arrival_time), burst_time(_burst_time), remaining_time(_burst_time) {};
-    Job(int _arrival_time, int _burst_time, std::vector<std::pair<int, int>> _io_events)
-        : arrival_time(_arrival_time), burst_time(_burst_time), remaining_time(_burst_time), io_events(std::move(_io_events))
+    Job(int _arrival_time, int _duration) : arrival_time(_arrival_time), duration(_duration), remaining_time(_duration) {};
+    Job(int _arrival_time, int _duration, std::vector<std::pair<int, int>> _io_events)
+        : arrival_time(_arrival_time), duration(_duration), remaining_time(_duration), io_events(std::move(_io_events))
     {
         next_io();
     };
@@ -21,7 +21,7 @@ struct Job
     int start_time = -1;
     int end_time = -1;
     int queue_no = 0;
-    int burst_time = -1;
+    int duration = -1;
     int arrival_time = -1;
     int remaining_time = -1;
     int io_at = -1;

@@ -16,7 +16,7 @@ int Job::get_response_t()
 
 void Job::print_job()
 {
-    printf("b (arr=%d, dur=%d): Start = %d, Remaining = %d\n", arrival_time, burst_time, start_time, remaining_time);
+    printf("b (arr=%d, dur=%d): Start = %d, Remaining = %d\n", arrival_time, duration, start_time, remaining_time);
 }
 
 void Job::next_io()
