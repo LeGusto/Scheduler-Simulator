@@ -12,21 +12,26 @@
 
 int main(int argc, char *argv[])
 {
+    const char *policy_name = (argc > 1) ? argv[1] : "fifo";
+    if (argc <= 1)
+        std::cerr << "No policy given, defaulting to 'fifo'. "
+                     "Usage: " << argv[0] << " <policy> [workload_file]\n";
+
     Policy *pol;
-    if (argc > 1)
+    if (strcmp(policy_name, "sjf") == 0)
+        pol = new SJF;
+    else if (strcmp(policy_name, "fifo") == 0)
+        pol = new FIFO;
+    else if (strcmp(policy_name, "stcf") == 0)
+        pol = new STCF;
+    else if (strcmp(policy_name, "robin") == 0)
+        pol = new ROBIN;
+    else if (strcmp(policy_name, "mlfq") == 0)
+        pol = new MLFQ;
+    else
     {
-        if (strcmp(argv[1], "sjf") == 0)
-            pol = new SJF;
-        else if (strcmp(argv[1], "fifo") == 0)
-            pol = new FIFO;
-        else if (strcmp(argv[1], "stcf") == 0)
-            pol = new STCF;
-        else if (strcmp(argv[1], "robin") == 0)
-            pol = new ROBIN;
-        else if (strcmp(argv[1], "mlfq") == 0)
-            pol = new MLFQ;
-        else
-            pol = new FIFO;
+        std::cerr << "Unknown policy '" << policy_name << "', defaulting to 'fifo'.\n";
+        pol = new FIFO;
     }
 
     const char *dir = "";
