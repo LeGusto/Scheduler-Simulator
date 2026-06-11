@@ -29,5 +29,5 @@ struct Job
     int io_ready_at = -1;
     std::vector<std::pair<int, int>> io_events;
 
-    int remaining_quantum = 0;
+    int remaining_quantum = -1;
 };

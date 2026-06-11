@@ -8,7 +8,7 @@
 
 void MLFQ::enqueue_job(Job &job)
 {
-    job.remaining_quantum = MLFQ_QUANTUM;
+    if (job.remaining_quantum == -1) job.remaining_quantum = MLFQ_QUANTUM;
     qs[job.queue_no].push_back(std::move(job));
 }
 

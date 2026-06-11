@@ -6,11 +6,11 @@ A CPU scheduler simulator built in C++.
 
 | Policy | Description |
 |--------|-------------|
-| `fifo` | First In First Out — jobs run in arrival order |
-| `sjf` | Shortest Job First — non-preemptive, picks shortest burst |
-| `stcf` | Shortest Time to Completion First — preemptive SJF |
-| `robin` | Round Robin — each job gets a fixed time quantum |
-| `mlfq` | Multi-Level Feedback Queue — priority queues with demotion and periodic boost |
+| `fifo` | First In First Out - jobs run in arrival order |
+| `sjf` | Shortest Job First - non-preemptive, picks shortest burst |
+| `stcf` | Shortest Time to Completion First - preemptive SJF |
+| `robin` | Round Robin - each job gets a fixed time quantum |
+| `mlfq` | Multi-Level Feedback Queue - priority queues with demotion and periodic boost |
 
 ## Build
 
@@ -40,9 +40,9 @@ arrival  burst  [io_at  io_duration] ...
 ```
 
 - Lines starting with `#` are ignored
-- `arrival` — tick at which the job enters the system
-- `burst` — total CPU time needed
-- `io_at io_duration` — optional pairs: block for I/O after `io_at` time, resume after `io_duration` ticks. Multiple pairs supported.
+- `arrival` - tick at which the job enters the system
+- `burst` - total CPU time needed
+- `io_at io_duration` - optional pairs: block for I/O after `io_at` time, resume after `io_duration` ticks. Multiple pairs supported.
 
 Example:
 ```
@@ -65,5 +65,5 @@ Edit `CONFIG.h` to change scheduler parameters:
 
 ## Metrics
 
-- **Turnaround time** — finish time − arrival time
-- **Response time** — first run time − arrival time
+- **Turnaround time**: finish time − arrival time
+- **Response time**: first run time − arrival time
